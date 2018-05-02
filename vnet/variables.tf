@@ -1,11 +1,11 @@
 variable "location" {
-  value = "centralus"
+  default = "centralus"
 }
 
 variable "environment" {
-  value = "dev"
+  default = "dev"
 }
 
 variable "application_name" {
-  value = "themis"
+  default = "themis"
 }
