@@ -11,3 +11,18 @@ resource "azurerm_virtual_network" "vnet" {
 }
 
 
+resource "azurerm_route_table" "test" {
+  name                = "acceptanceTestSecurityGroup1"
+  location            = "${var.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+
+  route {
+    name           = "route1"
+    address_prefix = "10.10.0.0/16"
+    next_hop_type  = "vnetlocal"
+  }
+
+  tags {
+    environment = "Production"
+  }
+}
