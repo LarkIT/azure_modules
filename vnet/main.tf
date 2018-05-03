@@ -26,7 +26,7 @@ resource "azurerm_virtual_network" "vnet" {
 #}
 
 resource "azurerm_subnet" "subnett" {
-    name                 = ""${var.environment}_${var.application_name}_subnet"
+    name                 = "${var.environment}_${var.application_name}_subnet"
     resource_group_name  = "${azurerm_resource_group.rg.name}"
     virtual_network_name = "${azurerm_virtual_network.vnet.name}"
     address_prefix       = "10.10.0.0/24"
