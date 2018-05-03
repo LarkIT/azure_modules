@@ -12,13 +12,13 @@ resource "azurerm_virtual_network" "vnet" {
 
 
 resource "azurerm_route_table" "table" {
-  name                = "${var.environment}_${var.application_name}_routetable}"
+  name                = "${var.environment}_${var.application_name}_routetable"
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 }
 
-resource "azurerm_route" "test" {
-  name                = "acceptanceTestRoute1"
+resource "azurerm_route" "route" {
+  name                = "${var.environment}_${var.application_name}_route"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   route_table_name    = "${azurerm_route_table.table.name}"
   address_prefix      = "10.10.0.0/16"
