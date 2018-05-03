@@ -16,3 +16,11 @@ resource "azurerm_route_table" "table" {
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 }
+
+resource "azurerm_route" "test" {
+  name                = "acceptanceTestRoute1"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+  route_table_name    = "${azurerm_route_table.table.name}"
+  address_prefix      = "10.10.0.0/16"
+  next_hop_type       = "vnetlocal"
+}
