@@ -25,7 +25,7 @@ resource "azurerm_virtual_network" "vnet" {
 #  next_hop_type       = "vnetlocal"
 #}
 
-resource "azurerm_subnet" "subnett" {
+resource "azurerm_subnet" "subnet" {
     name                 = "${var.environment}_${var.application_name}_subnet"
     resource_group_name  = "${azurerm_resource_group.rg.name}"
     virtual_network_name = "${azurerm_virtual_network.vnet.name}"
