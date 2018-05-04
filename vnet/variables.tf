@@ -1,15 +1,15 @@
 variable "location" {
-  default = "centralus"
+#  default = "centralus"
 }
 
 variable "environment" {
-  default = "dev"
+#  default = "dev"
 }
 
 variable "application_name" {
-  default = "themis"
+#  default = "themis"
 }
 
 variable "address_space" {
-  default = "10.10.0.0/16"
+#  default = "10.10.0.0/16"
 }
