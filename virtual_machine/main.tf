@@ -73,7 +73,7 @@ resource "azurerm_virtual_machine" "myterraformvm" {
     }
 
     os_profile {
-        computer_name  = "${var.hostname}""
+        computer_name  = "${var.hostname}"
         admin_username = "azureuser"
     }
 
