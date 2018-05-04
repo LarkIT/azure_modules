@@ -51,7 +51,7 @@ resource "azurerm_network_interface" "nic" {
     }
 }
 
-resource "azurerm_virtual_machine" "myterraformvm" {
+resource "azurerm_virtual_machine" "virtual_machine" {
     name                  = "myVM"
     location              = "${var.location}"
     resource_group_name   = "${var.rg}"
