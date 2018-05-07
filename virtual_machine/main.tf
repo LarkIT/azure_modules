@@ -63,7 +63,6 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   vm_size               = "Standard_DS1_v2"
 
   storage_os_disk {
-    count             = "${var.number_servers}"
     name              = "${var.environment}_${var.application_name}_osdisk_${count.index}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
