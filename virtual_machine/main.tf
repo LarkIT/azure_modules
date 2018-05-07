@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "public_ip" {
-    name                         = "myPublicIP"
+    name                         = "${var.environment}_${var.application_name}_public_ip"
     location                     = "${var.location}"
     resource_group_name          = "${var.rg}"
     public_ip_address_allocation = "dynamic"
@@ -34,7 +34,7 @@ resource "azurerm_network_security_group" "ssh" {
 
 
 resource "azurerm_network_interface" "nic" {
-    name                      = "myNIC"
+    name                      = "${var.environment}_${var.application_name}_nic"
     location                  = "${var.location}"
     resource_group_name       = "${var.rg}"
     network_security_group_id = "${azurerm_network_security_group.ssh.id}"
