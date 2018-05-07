@@ -34,3 +34,24 @@ resource "azurerm_subnet" "test_db_subnet" {
     virtual_network_name = "${azurerm_virtual_network.vnet.name}"
     address_prefix       = "${var.network[ "test_db" ]}"
 }
+
+resource "azurerm_subnet" "prod_dmz_subnet" {
+    name                 = "prod_${var.environment}_${var.application_name}_dmz_subnet"
+    resource_group_name  = "${local.resource_group}"
+    virtual_network_name = "${azurerm_virtual_network.vnet.name}"
+    address_prefix       = "${var.network[ "prod_dmz" ]}"
+}
+
+resource "azurerm_subnet" "prod_app_subnet" {
+    name                 = "prod_${var.environment}_${var.application_name}_app_subnet"
+    resource_group_name  = "${local.resource_group}"
+    virtual_network_name = "${azurerm_virtual_network.vnet.name}"
+    address_prefix       = "${var.network[ "prod_app" ]}"
+}
+
+resource "azurerm_subnet" "prod_db_subnet" {
+    name                 = "prod_${var.environment}_${var.application_name}_db_subnet"
+    resource_group_name  = "${local.resource_group}"
+    virtual_network_name = "${azurerm_virtual_network.vnet.name}"
+    address_prefix       = "${var.network[ "prod_db" ]}"
+}
