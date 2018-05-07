@@ -52,6 +52,7 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_virtual_machine" "virtual_machine" {
+    count                 = "${var.number_servers}"
     name                  = "myVM"
     location              = "${var.location}"
     resource_group_name   = "${var.rg}"
