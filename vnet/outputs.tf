@@ -3,7 +3,7 @@
 #}
 
 output "rg_name" {
-  value = "${local.resource}"
+  value = "${local.resource_group}"
 }
 
 output "test_dmz_subnet_id" {
