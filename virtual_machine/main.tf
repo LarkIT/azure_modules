@@ -44,7 +44,8 @@ resource "azurerm_network_interface" "nic" {
     name                          = "${var.environment}_${var.application_name}_nic_config_${count.index}"
     subnet_id                     = "${var.subnet_id}"
     private_ip_address_allocation = "dynamic"
-    public_ip_address_id          = "${azurerm_public_ip.public_ip.id}"
+#    public_ip_address_id          = "${azurerm_public_ip.public_ip.id}"
+    public_ip_address_id          = "${azurerm_public_ip.public_ip_[count.index].id}"
   }
 
   tags {
