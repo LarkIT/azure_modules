@@ -11,7 +11,7 @@ variable "application_name" {
 }
 
 variable "address_space" {
-  #  default = "10.10.0.0/16"
+  default = "10.10.0.0/16"
 }
 
 variable "network" {
