@@ -40,7 +40,7 @@ resource "azurerm_network_interface" "nic" {
     network_security_group_id = "${azurerm_network_security_group.ssh.id}"
 
     ip_configuration {
-        name                          = "myNicConfiguration"
+        name                          = "${var.environment}_${var.application_name}_nic_config"
         subnet_id                     = "${var.subnet_id}"
         private_ip_address_allocation = "dynamic"
         public_ip_address_id          = "${azurerm_public_ip.public_ip.id}"
@@ -53,14 +53,14 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_virtual_machine" "virtual_machine" {
     count                 = "${var.number_servers}"
-    name                  = "myVM"
+    name                  = "${var.environment}_${var.application_name}_vm"
     location              = "${var.location}"
     resource_group_name   = "${var.rg}"
     network_interface_ids = ["${azurerm_network_interface.nic.id}"]
     vm_size               = "Standard_DS1_v2"
 
     storage_os_disk {
-        name              = "myOsDisk"
+        name              = "${var.environment}_${var.application_name}_osdisk"
         caching           = "ReadWrite"
         create_option     = "FromImage"
         managed_disk_type = "Premium_LRS"
