@@ -19,7 +19,7 @@ resource "azurerm_network_security_rule" "winrm" {
 }
 
 resource "azurerm_network_security_rule" "ssl" {
-  name                        = "winrm"
+  name                        = "ssl"
   priority                    = 100
   direction                   = "Outbound"
   access                      = "Allow"
@@ -32,8 +32,8 @@ resource "azurerm_network_security_rule" "ssl" {
   network_security_group_name = "${azurerm_network_security_group.windows.name}"
 }
 
-resource "azurerm_network_security_rule" "ssl" {
-  name                        = "winrm"
+resource "azurerm_network_security_rule" "ftp" {
+  name                        = "ftp"
   priority                    = 100
   direction                   = "Outbound"
   access                      = "Allow"
