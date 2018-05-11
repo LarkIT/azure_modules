@@ -7,7 +7,7 @@ resource "azurerm_network_security_group" "windows" {
 resource "azurerm_network_security_rule" "winrm" {
   name                        = "winrm"
   priority                    = 100
-  direction                   = "Outbound"
+  direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
@@ -21,7 +21,7 @@ resource "azurerm_network_security_rule" "winrm" {
 resource "azurerm_network_security_rule" "ssl" {
   name                        = "ssl"
   priority                    = 101
-  direction                   = "Outbound"
+  direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
@@ -35,11 +35,25 @@ resource "azurerm_network_security_rule" "ssl" {
 resource "azurerm_network_security_rule" "ftp" {
   name                        = "ftp"
   priority                    = 102
-  direction                   = "Outbound"
+  direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "21"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = "${var.resource_group}"
+  network_security_group_name = "${azurerm_network_security_group.windows.name}"
+}
+
+resource "azurerm_network_security_rule" "ftp-pasv" {
+  name                        = "ftp"
+  priority                    = 103
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "5000-5100"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = "${var.resource_group}"
