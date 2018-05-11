@@ -1,25 +1,25 @@
 # Create Network Security Group and rule
-resource "azurerm_network_security_group" "rdp" {
-  name                = "myNetworkSecurityGroup"
-  location            = "${var.location}"
-  resource_group_name = "${var.rg}"
+#resource "azurerm_network_security_group" "rdp" {
+#  name                = "myNetworkSecurityGroup"
+#  location            = "${var.location}"
+#  resource_group_name = "${var.rg}"
 
-  security_rule {
-    name                       = "RDP"
-    priority                   = 1001
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "3389"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+#  security_rule {
+#    name                       = "RDP"
+#    priority                   = 1001
+#    direction                  = "Inbound"
+#    access                     = "Allow"
+#    protocol                   = "Tcp"
+#    source_port_range          = "*"
+#    destination_port_range     = "3389"
+#    source_address_prefix      = "*"
+#    destination_address_prefix = "*"
+#  }
 
-  tags {
-    environment = "Terraform Demo"
-  }
-}
+#  tags {
+#    environment = "Terraform Demo"
+#  }
+#}
 
 resource "azurerm_public_ip" "public_ip" {
   count                        = "${var.number_servers}"
@@ -38,7 +38,8 @@ resource "azurerm_network_interface" "nic" {
   name                      = "${var.application_name}_${var.hostname}_nic_${count.index}"
   location                  = "${var.location}"
   resource_group_name       = "${var.rg}"
-  network_security_group_id = "${azurerm_network_security_group.rdp.id}"
+  #network_security_group_id = "${azurerm_network_security_group.rdp.id}"
+  network_security_group_id = "${var.security_group}"
 
   ip_configuration {
     name                          = "${var.application_name}_${var.hostname}_nic_config_${count.index}"
