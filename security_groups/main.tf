@@ -1,5 +1,5 @@
 resource "azurerm_network_security_group" "windows" {
-  name                = "myNetworkSecurityGroup"
+  name                = "windows"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
 }
