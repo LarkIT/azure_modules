@@ -4,7 +4,7 @@ resource "azurerm_network_security_group" "winrm" {
   resource_group_name = "${var.resource_group}"
 
   security_rule {
-    name                       = "SSH"
+    name                       = "winrm"
     priority                   = 1001
     direction                  = "Inbound"
     access                     = "Allow"
@@ -26,7 +26,7 @@ resource "azurerm_network_security_group" "ssl" {
   resource_group_name = "${var.resource_group}"
 
   security_rule {
-    name                       = "SSH"
+    name                       = "ssl"
     priority                   = 1001
     direction                  = "Inbound"
     access                     = "Allow"
@@ -48,7 +48,7 @@ resource "azurerm_network_security_group" "ftp" {
   resource_group_name = "${var.resource_group}"
 
   security_rule {
-    name                       = "SSH"
+    name                       = "ftp"
     priority                   = 1001
     direction                  = "Inbound"
     access                     = "Allow"
