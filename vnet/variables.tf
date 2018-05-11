@@ -27,7 +27,7 @@ variable "network" {
   }
 }
 
-varaible "dns_server" {
+varaible "dns_servers" {
   default = ["10.10.0.7", "10.10.0.8"]
 }
 
