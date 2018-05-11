@@ -4,16 +4,16 @@ resource "azurerm_network_security_group" "windows" {
   resource_group_name = "${var.resource_group}"
 }
 
-resource "azurerm_network_security_group" "ssl" {
-  name                = "myNetworkSecurityGroup"
-  location            = "${var.location}"
-}
+#resource "azurerm_network_security_group" "ssl" {
+#  name                = "myNetworkSecurityGroup"
+#  location            = "${var.location}"
+#}
 
-resource "azurerm_network_security_group" "ftp" {
-  name                = "myNetworkSecurityGroup"
-  location            = "${var.location}"
-  resource_group_name = "${var.resource_group}"
-}
+#resource "azurerm_network_security_group" "ftp" {
+#  name                = "myNetworkSecurityGroup"
+#  location            = "${var.location}"
+#  resource_group_name = "${var.resource_group}"
+#}
 
 
 resource "azurerm_network_security_rule" "winrm" {
