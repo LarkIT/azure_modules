@@ -26,3 +26,8 @@ variable "network" {
     prod_db  = "10.10.120.0/24"
   }
 }
+
+varaible "dns_server" {
+  default = ["10.10.0.7", "10.10.0.8"]
+}
+
