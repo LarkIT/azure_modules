@@ -4,6 +4,20 @@ resource "azurerm_network_security_group" "windows" {
   resource_group_name = "${var.resource_group}"
 }
 
+resource "azurerm_network_security_rule" "rdp" {
+  name                        = "rdp"
+  priority                    = 99
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "3389"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = "${var.resource_group}"
+  network_security_group_name = "${azurerm_network_security_group.windows.name}"
+}
+
 resource "azurerm_network_security_rule" "winrm" {
   name                        = "winrm"
   priority                    = 100
@@ -47,7 +61,7 @@ resource "azurerm_network_security_rule" "ftp" {
 }
 
 resource "azurerm_network_security_rule" "ftp-pasv" {
-  name                        = "ftp"
+  name                        = "ftp-pasv"
   priority                    = 103
   direction                   = "Inbound"
   access                      = "Allow"
