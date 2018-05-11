@@ -1,4 +1,4 @@
-resource "azurerm_public_ip" "lb_ip" {
+resource "azurerm_public_ip" "public_ip" {
   name                         = "test"
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group}"
@@ -7,5 +7,16 @@ resource "azurerm_public_ip" "lb_ip" {
 
   tags {
     environment = "staging"
+  }
+}
+
+resource "azurerm_lb" "loadbalancer" {
+  name                = "test"
+  location            = "${var.location}"
+  resource_group_name = "${var.resource_group}"
+
+  frontend_ip_configuration {
+    name                 = "PublicIPAddress"
+    public_ip_address_id = "${azurerm_public_ip.public_ip.id}"
   }
 }
