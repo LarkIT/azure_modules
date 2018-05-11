@@ -20,7 +20,7 @@ resource "azurerm_network_security_rule" "winrm" {
 
 resource "azurerm_network_security_rule" "ssl" {
   name                        = "ssl"
-  priority                    = 100
+  priority                    = 101
   direction                   = "Outbound"
   access                      = "Allow"
   protocol                    = "Tcp"
@@ -34,7 +34,7 @@ resource "azurerm_network_security_rule" "ssl" {
 
 resource "azurerm_network_security_rule" "ftp" {
   name                        = "ftp"
-  priority                    = 100
+  priority                    = 102
   direction                   = "Outbound"
   access                      = "Allow"
   protocol                    = "Tcp"
