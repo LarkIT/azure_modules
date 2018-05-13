@@ -1,13 +1,19 @@
+locals {
+  default_tags = {
+    environment      = "${var.app_environment}"
+    application_name = "${var.application_name}"
+  }
+
+  tags = "${merge(var.default_tags, var.tags)}"
+}
+
 resource "azurerm_public_ip" "public_ip" {
   name                         = "${var.environment}_${var.application_name}_public_ip"
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group}"
   public_ip_address_allocation = "static"
   domain_name_label            = "${var.environment}-${var.application_name}-vnet-rg"
-
-  tags {
-    environment = "staging"
-  }
+  tags                         = "${local.tags}"
 }
 
 resource "azurerm_lb" "loadbalancer" {
@@ -39,7 +45,7 @@ resource "azurerm_lb_nat_pool" "lbnatpool" {
   frontend_ip_configuration_name = "PublicIPAddress"
 }
 
-resource "azurerm_virtual_machine_scale_set" "test" {
+resource "azurerm_virtual_machine_scale_set" "vmss" {
   name                = "${var.environment}_${var.application_name}_vmss"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
@@ -66,10 +72,10 @@ resource "azurerm_virtual_machine_scale_set" "test" {
   }
 
   storage_profile_data_disk {
-    lun            = 0
-    caching        = "ReadWrite"
-    create_option  = "Empty"
-    disk_size_gb   = 10
+    lun           = 0
+    caching       = "ReadWrite"
+    create_option = "Empty"
+    disk_size_gb  = 10
   }
 
   os_profile {

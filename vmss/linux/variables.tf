@@ -13,3 +13,7 @@ variable "ssh_public_key" {}
 variable "admin_username" {
   default = "azure"
 }
+
+variable "tags" {
+  default = {}
+}
