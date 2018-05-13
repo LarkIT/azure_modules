@@ -1,14 +1,8 @@
-variable "location" {
-  #  default = "centralus"
-}
+variable "location" {}
 
-variable "environment" {
-  #  default = "dev"
-}
+variable "environment" {}
 
-variable "application_name" {
-  #  default = "themis"
-}
+variable "application_name" {}
 
 variable "address_space" {
   default = "10.10.0.0/16"
@@ -30,4 +24,3 @@ variable "network" {
 variable "dns_servers" {
   default = ["10.10.0.7", "10.10.0.8"]
 }
-
