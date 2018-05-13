@@ -1,13 +1,19 @@
+locals {
+  default_tags = {
+    environment      = "${var.environment}"
+    application_name = "${var.application_name}"
+  }
+
+  tags = "${merge(local.default_tags, var.tags)}"
+}
+
 resource "azurerm_public_ip" "public_ip" {
   name                         = "${var.environment}_${var.application_name}_public_ip"
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group}"
   public_ip_address_allocation = "static"
   domain_name_label            = "${var.environment}-${var.application_name}-vnet-rg"
-
-  tags {
-    environment = "staging"
-  }
+  tags                         = "${local.tags}"
 }
 
 resource "azurerm_lb" "loadbalancer" {
@@ -44,6 +50,7 @@ resource "azurerm_virtual_machine_scale_set" "test" {
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
   upgrade_policy_mode = "Manual"
+  tags                = "${local.tags}"
 
   sku {
     name     = "Standard_A0"
@@ -66,10 +73,10 @@ resource "azurerm_virtual_machine_scale_set" "test" {
   }
 
   storage_profile_data_disk {
-    lun            = 0
-    caching        = "ReadWrite"
-    create_option  = "Empty"
-    disk_size_gb   = 10
+    lun           = 0
+    caching       = "ReadWrite"
+    create_option = "Empty"
+    disk_size_gb  = 10
   }
 
   os_profile {
@@ -92,9 +99,5 @@ resource "azurerm_virtual_machine_scale_set" "test" {
       load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.bpepool.id}"]
       load_balancer_inbound_nat_rules_ids    = ["${element(azurerm_lb_nat_pool.lbnatpool.*.id, count.index)}"]
     }
-  }
-
-  tags {
-    environment = "staging"
   }
 }
