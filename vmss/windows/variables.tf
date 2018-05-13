@@ -11,3 +11,7 @@ variable "subnet_id" {}
 variable "admin_username" {
   default = "azure"
 } 
+
+variable "tags" {
+  default = {}
+}
