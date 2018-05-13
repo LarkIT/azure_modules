@@ -1,6 +1,6 @@
 locals {
   default_tags = {
-    environment      = "${var.app_environment}"
+    environment      = "${var.environment}"
     application_name = "${var.application_name}"
   }
 
