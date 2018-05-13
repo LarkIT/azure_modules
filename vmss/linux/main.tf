@@ -4,7 +4,7 @@ locals {
     application_name = "${var.application_name}"
   }
 
-  tags = "${merge(var.default_tags, var.tags)}"
+  tags = "${merge(local.default_tags, var.tags)}"
 }
 
 resource "azurerm_public_ip" "public_ip" {
