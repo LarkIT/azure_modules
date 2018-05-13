@@ -50,6 +50,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
   upgrade_policy_mode = "Manual"
+  tags                = ${local.tags}"
 
   sku {
     name     = "Standard_A0"
@@ -103,9 +104,5 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
       load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.bpepool.id}"]
       load_balancer_inbound_nat_rules_ids    = ["${element(azurerm_lb_nat_pool.lbnatpool.*.id, count.index)}"]
     }
-  }
-
-  tags {
-    environment = "staging"
   }
 }
